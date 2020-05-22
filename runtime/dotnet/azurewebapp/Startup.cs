@@ -171,6 +171,8 @@ namespace Microsoft.BotFramework.Composer.WebAppTemplates
             var resourceExplorer = new ResourceExplorer().AddFolder(botDir);
             var rootDialog = GetRootDialog(botDir);
 
+            resourceExplorer.RegisterType<OnQnAMatch>(OnQnAMatch.Kind);
+
             var defaultLocale = Configuration.GetValue<string>("defaultLocale") ?? "en-us";
 
             services.AddSingleton(resourceExplorer);

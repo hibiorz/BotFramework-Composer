@@ -53,6 +53,19 @@ namespace Microsoft.BotFramework.Composer.WebAppTemplates
                 builder.UseLuisConfigAdapter()
                     .UseLuisSettings();
 
+                try
+                {
+                    foreach (string filePath in Directory.GetFiles(botRoot, "generated/qnamaker.settings.*.json"))
+                    {
+                        builder.AddJsonFile(filePath, optional: true, reloadOnChange: true);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Trace.WriteLine(ex.Message);
+                }
+
+
                 builder.AddEnvironmentVariables()
                        .AddCommandLine(args);
             })
